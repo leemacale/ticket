@@ -4,14 +4,16 @@ use App\Http\Controllers\CompaniesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TripController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/user/dashboard', function () {
+    return view('user-dashboard');
+})->middleware(['auth', 'verified'])->name('user.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -37,14 +39,21 @@ Route::put('/company/store',[CompaniesController::class,'store'])->name('company
 Route::delete('/company/{company}',[CompaniesController::class,'destroy'])->name('company.destroy');
 
 
+//Trips routes
+
+Route::get('/trips',[TripController::class,'index'])->name('trips.index');
+Route::get('/trips/add',[TripController::class,'add'])->name('trips.add');
+Route::put('/trips/store',[TripController::class,'store'])->name('trips.store');
+Route::delete('/trips/{trip}',[TripController::class,'destroy'])->name('trips.destroy');
+
+
 Route::get('/login', function () {
     return view('dashboard');
 })->name('login.index');
 
 require __DIR__.'/auth.php';
-Route::get('/', function () {
-    return view('public_view');
-})->name('publicview');
+Route::get('/',[SearchController::class,'index'])->name('publicview');
+
 
 // Routes for Login Roles
 Route::get('/dashboard/user', function () {
