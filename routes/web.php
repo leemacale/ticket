@@ -15,6 +15,15 @@ Route::get('/user/dashboard', function () {
     return view('user-dashboard');
 })->middleware(['auth', 'verified'])->name('user.dashboard');
 
+Route::get('/terminal/dashboard', function () {
+    return view('terminal-dashboard');
+})->middleware(['auth', 'verified'])->name('terminal.dashboard');
+
+
+Route::get('/conductor/dashboard', function () {
+    return view('conductor-dashboard');
+})->middleware(['auth', 'verified'])->name('conductor.dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
