@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
                     <a href="{{ route('dashboard') }}">
-                        <img src="../images/twbus.png"  alt="" style="width: 45%" />
+                        <img src="{{url('/images/twbus.png')}}"  alt="" style="width: 45%" />
                         
                     </a>
                   
@@ -26,6 +26,10 @@
                     </x-nav-link>
                     <x-nav-link :href="route('trips.index')" :active="request()->routeIs('trips*')">
                         {{ __('Trips') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('trips.index')" :active="request()->routeIs('booking*')">
+                        {{ __('Booking') }}
                     </x-nav-link>
                 </div>
             </div>

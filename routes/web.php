@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BusPositionController;
 use App\Http\Controllers\CompaniesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -56,6 +57,13 @@ Route::get('/trips',[TripController::class,'index'])->name('trips.index');
 Route::get('/trips/add',[TripController::class,'add'])->name('trips.add');
 Route::put('/trips/store',[TripController::class,'store'])->name('trips.store');
 Route::delete('/trips/{trip}',[TripController::class,'destroy'])->name('trips.destroy');
+
+Route::get('/trips/{trip}/location',[TripController::class,'loc'])->name('trips.loc');
+Route::get('/bus/{trip}/location',[TripController::class,'add_loc'])->name('trips.add_loc');
+
+
+Route::put('/bus/store/location',[BusPositionController::class,'store'])->name('bus.store');
+
 
 
 Route::get('/login', function () {

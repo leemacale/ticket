@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusPosition;
 use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,12 @@ class TripController extends Controller
         Trip::create($validated);
         return redirect(route('trips.index', absolute: false))->with('message', 'Trip created successfully!');
     } 
+
+    public function store_loc(Request $request)
+    {
+        //
+       
+    } 
     public function add()
     {
         //
@@ -70,6 +77,16 @@ class TripController extends Controller
     ]);
     }
 
+    
+    public function add_loc(Trip $trip)
+    {
+        //
+
+        return view('trip.pos',
+        ['trip'=>$trip
+    ]);
+    }
+
 
     /**
      * Display the specified resource.
@@ -78,6 +95,17 @@ class TripController extends Controller
     {
         //
     }
+
+    public function loc(Trip $trip)
+    {
+        //
+        $busposition = BusPosition::where('trip_id', $trip->id)->latest('id')->first();
+        return view('trip.position',[
+            'busposition' => $busposition,
+            'trip' => $trip
+        ]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

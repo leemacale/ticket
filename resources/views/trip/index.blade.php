@@ -34,7 +34,9 @@
                         <form method="POST" action="{{ route('trips.destroy', $trip->id) }}">
                             @csrf
                             @method('DELETE')
-                            
+                            <!-- //route('contracts.payment', $trip->id) }}  -->
+                            <x-bladewind::button  color="green" icon="map-pin"  title="send location" onclick="window.location='{{route('trips.add_loc', $trip->id) }}'">SEND LOCATION</x-bladewind::button>
+                            <x-bladewind::button  color="yellow" icon="map-pin"  title="bus location" onclick="window.location='{{route('trips.loc', $trip->id) }}'">BUS LOCATION</x-bladewind::button>
                         <x-bladewind::button  color="red" icon="trash"  title="delete" can_submit="true">DELETE</x-bladewind::button>
                         </form>
                         </td>
