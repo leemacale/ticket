@@ -21,7 +21,10 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
-
+    public function create_conductor(): View
+    {
+        return view('auth.register-conductor');
+    }
     /**
      * Handle an incoming registration request.
      *
@@ -33,12 +36,20 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'dob' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255'],
+            'contact' => ['required', 'string', 'max:255'],
+            
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'role' => 'user',
         ]);
 
         event(new Registered($user));
@@ -46,5 +57,36 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+    public function store_conductor(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'dob' => ['required', 'string', 'max:255'],
+            'gender' => ['required', 'string', 'max:255'],
+            'contact' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
+            
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'contact' => $request->contact,
+            'company' => $request->company,
+            'role' => 'conductor',
+            'status' => 'pending',
+        ]);
+
+        event(new Registered($user));
+
+  
+
+        return redirect(route('login', absolute: false));
     }
 }

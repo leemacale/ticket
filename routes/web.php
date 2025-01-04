@@ -24,6 +24,8 @@ Route::get('/conductor/dashboard', function () {
     return view('conductor-dashboard');
 })->middleware(['auth', 'verified'])->name('conductor.dashboard');
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -63,20 +65,6 @@ Route::get('/login', function () {
 require __DIR__.'/auth.php';
 Route::get('/',[SearchController::class,'index'])->name('publicview');
 
-
-// Routes for Login Roles
-Route::get('/dashboard/user', function () {
-    return view('user-account.user_logged_in');
-})->name('user.dashboard');
-
-Route::get('/dashboard/terminal-manager', function () {
-    return view('admin-account.admin_page');
-})->name('admin.dashboard');
-
-
-Route::get('/dashboard/conductor', function () {
-    return view('conductor-account.conductor_page');
-})->name('conductor.dashboard');
 
 // End ///
 

@@ -1,7 +1,7 @@
 <x-guest-layout>
-    <h2 class="mx-auto "><b>User Registration</b></h2>
+    <h2 class="mx-auto "><b>Conductor Registration</b></h2>
                 <hr><br>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('store.conductor') }}">
         @csrf
 
         <!-- Name -->
@@ -62,6 +62,15 @@
                 <option value="Other">Other</option>
             </select>
             <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+        </div>
+        <div class="mt-4">
+            <x-input-label for="company" :value="__('Bus Company')" />
+            <select name="company" id="company" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" >
+                <option value="DLTB">DLTB</option>
+                <option value="JAM Liner">JAM Liner</option>
+                <option value="Victory Liner">Victory Liner</option>
+            </select>
+            <x-input-error :messages="$errors->get('company')" class="mt-2" />
         </div>
 
     
