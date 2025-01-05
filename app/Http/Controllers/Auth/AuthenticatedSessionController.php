@@ -29,11 +29,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $url = "";
-        if($request->user()->role === "admin"){
+        if($request->user()->role == "admin"){
             $url = "dashboard";
-        }elseif($request->user()->role === "conductor"){
+        }elseif($request->user()->role == "conductor"){
             $url = "conductor.dashboard";
-        }elseif($request->user()->role === "user"){
+        }elseif($request->user()->role == "user"){
             $url = "user.dashboard";
         }
 

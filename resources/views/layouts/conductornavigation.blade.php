@@ -5,8 +5,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
-                    <a href="{{ route('dashboard') }}">
-                        <img src="../images/twbus.png"  alt="" style="width: 45%" />
+                    <a href="{{ route('conductor.dashboard') }}">
+                        <img src="{{url('/images/twbus.png')}}"  alt="" style="width: 45%" />
                         
                     </a>
                   
@@ -15,12 +15,10 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 text-white sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('My Trips') }}
+                    <x-nav-link :href="route('trips.index2')" :active="request()->routeIs('trips*')">
+                        {{ __('Trips') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations*')">
-                        {{ __('Locations') }}
-                    </x-nav-link>
+                 
         
                 </div>
             </div>

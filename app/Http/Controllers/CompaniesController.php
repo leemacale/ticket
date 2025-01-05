@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Companies;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
@@ -21,6 +22,26 @@ class CompaniesController extends Controller
 
         return view('company.index', [
             'companies' => $companies
+        ]);
+    }
+
+    public function conductor()
+    {
+        //
+        $conductors = User::where('role', 'conductor')->get();
+ 
+        return view('conductor_trips.conductor', [
+            'conductors' => $conductors
+        ]);
+    }
+    public function approve(User $conductor)
+    {
+        //
+        User::where('id', $conductor->id)->update(['status'=>'approved']);
+        
+        $conductors = User::where('role', 'conductor')->get();
+        return view('conductor_trips.conductor', [
+            'conductors' => $conductors
         ]);
     }
 

@@ -8,8 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    
 </head>
 <body class="bg-gray-100">
 
@@ -20,44 +20,37 @@
 <div class="relative">
     <!-- Background Image -->
     <img src="{{ asset('images/bus-bg.png') }}" alt="Banner Image"
-         class="w-full object-cover"
+         class="object-cover w-full"
          style="position: absolute;  height: 500px; width: 100%;">
 
     <!-- Text Overlay -->
-    <div class="absolute inset-0 flex flex-col text-center text-white" style="position: absolute; top: 140px; left: -290px;">
-        <h1 class="text-3xl font-bold mb-4" style="text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);">
+    <div class="absolute inset-0 flex flex-col text-center text-white" style="position: absolute; top: 140px; left: -150px;">
+        <h1 class="mb-4 text-3xl font-bold" style="text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);">
             TICKETWISE Bus Online Booking
         </h1>
     </div>
 
+  
+
     <!-- Flex container for vertical alignment and left alignment -->
-    <div class="flex" style="position: absolute; top: 180px; left: 390px;">
+    <div class=" px-3 mx-auto" style="position: relative; top: 180px; width:80%">
         <!-- First text field with placeholder -->
-        <div class="relative" style="width: 13%; border-radius: 0;">
-            <input type="text" value="Manila" class="bg-white text-black py-2 px-10 pl-2 pr-8"
-                   disabled
-                   style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;" />
-            <img src="{{ asset('images/switch.png') }}" alt="icon" class="w-6 h-6 absolute right-2 top-1/2 transform -translate-y-1/2" />
-        </div>
-
-        <!-- Second text field (disabled) -->
-        <input type="text" value="Baguio" class="bg-white text-black py-2 px-10"
-               style="font-family: 'Kanit', sans-serif; width: 13%; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4);" disabled />
-
-   <!-- Third text field with image on the left side -->
-<div class="relative flex items-center" style="width: 15%; margin-top: 0; margin-left: 6px; border-right: 1px solid black;">
-    <input type="text" value="Tue, Oct 1"
-           class="bg-white text-black py-2 px-4 text-center"
-           style="font-family: 'Kanit', sans-serif; width: 100%; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); background-image: url('{{ asset('images/calendar.png') }}'); background-repeat: no-repeat; background-position: left 10px center; background-size: 20px 20px; padding-left: 40px;"
-           disabled />
-</div>
-
-<div class="relative flex items-center" style="width: 40%; margin-top: 0; margin-left: 0;">
-    <input type="text" class="bg-white text-black py-2 px-4 placeholder-black" disabled
-           placeholder="Point to Point" />
-    <button class="bg-black text-white py-2 px-6 hover:bg-red-700 hover:text-white transition-colors duration-300"
-            style="font-family: 'Kanit', sans-serif; height: 100%" id="updateBtn" onclick="window.location='{{ route('user.logged-in-bp') }}'">Find Tickets</button>
-</div>
+        <form method="POST" action="{{ route('search.trips') }}">
+            @csrf
+            @method('PUT')
+            <span class="grid items-center grid-cols-4 gap-4">
+            <select name="from" id="from" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;" >
+                <option value="" selected disabled>Starting Point</option>
+          
+            </select>
+            <select name="to" id="to" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;" >
+                <option value="" selected disabled>Destination</option>
+              
+            </select>
+            <input type="date" name="tripdate" id="tripdate" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;">
+           <input type="submit" name="search" value="Find Tickets" class="px-10 py-2 pl-2 pr-8 text-white bg-black"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); width: 100%;">
+        </span>
+        </form>
 
     </div>
 
@@ -66,21 +59,26 @@
 
 </div>
 <!-- Black container with gradient (decreased transparency at the top and darker at the bottom) -->
-<div style="position: absolute; top: 440px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); height: 300px; width: 1518px;">    <!-- Content goes here -->
-<h1 class="text-white text-3xl font-bold" style="position: absolute;left:120px; top: 150px;">INSTANT BOOKING</h1>
-
-<p class="text-white text-2xl" style="position: absolute;left:140px; top: 187px;" >Major routes available</p>
-<h2 class="text-white text-3xl font-bold" style="position: absolute;left:623px; top: 150px;">SECURE PAYMENT</h1>
-
-<p class="text-white text-2xl" style="position: absolute;left:637px; top: 187px;" >Cash option available</p>
-
-<h2 class="text-white text-3xl font-bold" style="position: absolute;left:1100px; top: 150px;">CREATE SUPPORT</h1>
-
-<p class="text-white text-2xl" style="position: absolute;left:1124px; top: 187px;" > We're here for you</p>
-
+<div style="position: absolute; top: 440px; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); height: 300px; width: 100%;">    <!-- Content goes here -->
+    <div class="grid grid-cols-3">
+        <div class="p-2 text-center ">
+            <img src="{{ asset('images/rocket.png') }}" alt="Banner Image" style="height:50%; width: 30%;"  class="mx-auto">
+            <h1 class="text-3xl font-bold text-white" >INSTANT BOOKING</h1>
+            <p class="text-2xl text-white" >Major routes available</p>
+            
+        </div>
+        <div class="p-2 text-center ">
+            <img src="{{ asset('images/lock.png') }}" alt="Banner Image" style="height:50%; width: 30%;"  class="mx-auto">
+            <h1 class="text-3xl font-bold text-white" >SECURE PAYMENT</h1>
+            <p class="text-2xl text-white" >Cash option available</p>
+        </div>
+        <div class="p-2 text-center ">
+            <img src="{{ asset('images/email.png') }}" alt="Banner Image" style="height:50%; width: 30%; " class="mx-auto">
+            <h1 class="text-3xl font-bold text-white" >CREATE SUPPORT</h1>
+            <p class="text-2xl text-white" > We're here for you</p>
+        </div>
+    </div>
 </div>
-
-
 
 
 	<img src="{{ asset('images/rocket.png') }}" alt="Banner Image"

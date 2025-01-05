@@ -41,11 +41,15 @@
             <span class="grid items-center grid-cols-4 gap-4">
             <select name="from" id="from" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;" >
                 <option value="" selected disabled>Starting Point</option>
-          
+                @foreach ($locations as $location)
+                <option value="{{$location->name}}" >{{$location->name}}</option>
+                @endforeach
             </select>
             <select name="to" id="to" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;" >
                 <option value="" selected disabled>Destination</option>
-              
+                @foreach ($locations as $location)
+                <option value="{{$location->name}}" >{{$location->name}}</option>
+                @endforeach
             </select>
             <input type="date" name="tripdate" id="tripdate" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;">
            <input type="submit" name="search" value="Find Tickets" class="px-10 py-2 pl-2 pr-8 text-white bg-black"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); width: 100%;">
@@ -79,34 +83,43 @@
         </div>
     </div>
 </div>
+<br><br>
+<center  style="position: absolute; top: 740px;"><h1><b>Results</b></h1></center>
+<div class=" grid grid-cols-1 w-full" style="position: absolute; top: 780px;">
+    
+@foreach ($trips as $trip)
+
+<div class=" w-full p-4 pt-2">
+    <div class="grid grid-cols-6">
+    <div class=" col-span-5" >
+    
+    <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div class="mb-2">
+       
+        <div class="text-gray-900 font-bold text-lg mb-2">Start Location: {{$trip->start}}</div>
+        <div class="text-gray-900 font-bold text-lg mb-2">Destination: {{$trip->destination}}</div>
+        <p class="text-gray-700 text-base">{{$trip->company->name}} - Bus no. {{$trip->bus}}</p>
+      </div>
+      <div class="flex items-center">
+        <div class="text-sm">
+          <p class="text-gray-600">Trip Date: {{$trip->date}}, {{$trip->time}}</p>
+        </div>
+      </div>
+      
+    </div>
+        </div>
+<div class="w-full bg-red-700 items-center text-center">
+    <br>
+    
+    <x-bladewind::button  color="white" icon="book-open"  title="delete" >Book Now</x-bladewind::button>
+  </div>
+    </div>
+  </div>
 
 
 
-
-<div id="about-us">
-<h1 class="text-black text-4xl" style="position: absolute;left:200px; top: 870px;"><strong>TICKETWISE Bus</strong> Your Point-to-Point Booking Site for Philippine Travel</h1>
-
-<p class="text-black text-xl" style="position: absolute; left: 100px; top: 990px; text-align: justify; width: 90%;" >
-  <strong>Bus Travel Philippines</strong><br>
-  Bus Company is a popular transportation company in the Philippines that offers various bus services to different destinations in the country. Among their many routes are the ones from PITX to Daet, Iriga via Naga, Legazpi via Naga, Matnog via Bulan, Bulan via Gubat, Naga, Tabaco via Naga, and Legazpi. <br>They also have routes from Aurora Cubao to Maasin via Baybay, Tabaco via Legazpi/Naga, San Ricardo, Daet, Liloan via Silago, Palompon via Villaba, Guiuan, Rawis, Matnog via Bulan, Maasin via Sogod, Palompon via Isabel, Gubat, Goa via Naga, Iriga via Naga, a <br><br>
-
-Bus Company offers various classes for their passengers, such as Regular AC, Lazyboy, and GH 2×2. The fares for the different classes and destinations vary, <br> with prices ranging from Php 804 to Php 2,645. Passengers can choose the class and destination that best fit their budget and travel preferences.<br> <br>
-
-Some of the popular routes offered by Bus Company include the PITX to Legazpi route via Naga, which is a Lazyboy class, and the Aurora Cubao to Maasin via Baybay route, which is a Regular AC class. Passengers can easily book their tickets through website or by visiting one of their terminals located throughout the Philippines. With reliable and comfortable bus services, passengers can travel to their desired destinations with ease and convenience. </p>
-
-<p class="text-black text-xl" style="position: absolute; left: 100px; top: 1390px; text-align: justify; width: 90%;" >
-  <strong>Bus Tickets</strong><br>
-  It can be frustrating to have to line up at jam-packed bus terminals. After queueing for so long, you might not even get a bus ticket on your preferred travel date! <br> <br>
-We highly recommend buying your Philippine bus tickets as soon as possible. TicketWise Bus publishes updated information on bus routes, terminals, and fares. You can now travel from Manila to Baguio, and more destinations.  </p>
-<p class="text-black text-xl" style="position: absolute; left: 100px; top: 1590px; text-align: justify; width: 90%;" >
-  <strong>Our supported payment methods</strong></p>
-
-  <img src="{{ asset('images/gcashlogo.png') }}" alt="Banner Image"
-         style="position: absolute; left: 320px; top:1700px;  height: 100px; width: 26%;">
-
-		 <img src="{{ asset('images/mara_logo.png') }}" alt="Banner Image"
-         style="position: absolute; left: 920px; top:1700px;  height: 100px; width: 16%;">
-
+@endforeach
+</div>
 
 </div>
 
@@ -115,55 +128,31 @@ We highly recommend buying your Philippine bus tickets as soon as possible. Tick
 
 
 <script>
-    $(document).ready(function () {
-        // Hover effects for update and refund buttons
-        const $updateBtn = $('#updateBtn');
-        const $refundBtn = $('#refundBtn');
+    const updateBtn = document.getElementById('updateBtn');
+    const refundBtn = document.getElementById('refundBtn');
 
-        $updateBtn.hover(
-            function () {
-                $refundBtn.addClass('hover:bg-black');
-            },
-            function () {
-                $refundBtn.removeClass('hover:bg-black').addClass('hover:bg-red-800');
-            }
-        );
+    updateBtn.addEventListener('mouseenter', () => {
+        refundBtn.classList.add('hover:bg-black');
+    });
 
-        $refundBtn.hover(
-            function () {
-                $(this).removeClass('hover:bg-red-800').addClass('hover:bg-black');
-            },
-            function () {
-                $(this).removeClass('hover:bg-black').addClass('hover:bg-red-800');
-            }
-        );
+    refundBtn.addEventListener('mouseenter', () => {
+        refundBtn.classList.remove('hover:bg-red-800');
+        refundBtn.classList.add('hover:bg-black');
+    });
 
-        // Example: Smooth scrolling for anchor links
-        $('a[href^="#"]').on('click', function (e) {
-            e.preventDefault();
-            const target = $($(this).attr('href'));
-            if (target.length) {
-                $('html, body').animate({ scrollTop: target.offset().top }, 1000);
-            }
-        });
-
-        // Example: Dynamic interaction with inputs
-        $('input').on('focus', function () {
-            $(this).css('border-color', '#ff0000');
-        }).on('blur', function () {
-            $(this).css('border-color', '');
-        });
+    updateBtn.addEventListener('mouseleave', () => {
+        refundBtn.classList.remove('hover:bg-black');
+        refundBtn.classList.add('hover:bg-red-800');
     });
 </script>
 
-
-<footer class="bg-black text-white py-6 mt-80 w-full" style="position:absolute; top:1700px;">
+<footer class="w-full py-6 text-white bg-black mt-80" style="position:absolute; top:1300px;">
     <div class="container mx-auto text-center">
         <p class="text-sm">&copy; Copyright 2024. All rights reserved.</p>
     </div>
 </footer>
     <!-- WHITE SPACE -->
-    <div class="w-3/4 h-48 relative flex items-center" style="position: absolute; top: 90px; left: 150px; width: 920px;">
+    <div class="relative flex items-center w-3/4 h-48" style="position: absolute; top: 90px; left: 150px; width: 920px;">
         <!-- Container content here -->
     </div>
 

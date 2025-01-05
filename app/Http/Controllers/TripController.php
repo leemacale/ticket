@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BusPosition;
 use App\Models\Trip;
+use App\Models\BusPosition;
+use App\Models\BusStatus;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 class TripController extends Controller
@@ -22,6 +25,20 @@ class TripController extends Controller
    
 
         return view('trip.index', [
+            'trips' => $trip
+            
+
+        ]);
+    }  
+    public function index2()
+    {
+        //
+        $comp_id = Auth::user()->company;
+        $trip = Trip::where('company_id', $comp_id)
+        ->get();
+   
+
+        return view('conductor_trips.index', [
             'trips' => $trip
             
 
@@ -59,6 +76,38 @@ class TripController extends Controller
         //
        
     } 
+
+
+    public function search(Request $request)
+    {
+        //
+        $trips = Trip::where('start', $request->from)
+        ->where('destination', $request->to)
+        ->where('date', $request->tripdate)
+        ->get();
+        $location = DB::table('locations')
+        ->orderBy('name')
+        ->get();
+
+        return view('search_results',
+        ['trips'=>$trips,
+        'locations' => $location
+    ]);
+       
+    } 
+    public function results(Trip $trips)
+    {
+        //
+        $location = DB::table('locations')
+        ->orderBy('name')
+        ->get();
+        dd($trips);
+        return view('search_results',
+        ['trips'=>$trips,
+        'locations' => $location
+    ]);
+       
+    } 
     public function add()
     {
         //
@@ -82,11 +131,61 @@ class TripController extends Controller
     {
         //
 
-        return view('trip.pos',
+        return view('conductor_trips.pos',
         ['trip'=>$trip
     ]);
     }
+    public function bus_status(Trip $trip)
+    {
+        //
 
+        $bus_status = BusStatus::where('trip_id', $trip->id)->latest('id')->first();
+
+        return view('conductor_trips.add',
+        ['trip'=>$trip,
+        'bus_status'=>$bus_status
+    ]);
+    }
+
+    public function bus_confirm(Trip $trip)
+    {
+        //
+        $currenttime = date("h:i:sa");
+        $conductorid = Auth::user()->id;
+
+        BusStatus::create([
+            'status'=>'In Transit',
+            'departure'=> $currenttime,
+            'trip_id'=>$trip->id,
+            'conductor_id'=>$conductorid,
+        ]);
+
+        $bus_status = BusStatus::where('trip_id', $trip->id)->latest('id')->first();
+
+        return view('conductor_trips.add',
+        ['trip'=>$trip,
+        'bus_status'=>$bus_status
+    ]);
+    }
+    public function bus_arrival(Trip $trip)
+    {
+        //
+        $currenttime = date("h:i:sa");
+        $conductorid = Auth::user()->id;
+
+        BusStatus::where('trip_id', $trip->id)
+        ->update([
+            'status'=>'Arrived at Destination',
+            'arrival'=> $currenttime,
+        ]);
+
+        $bus_status = BusStatus::where('trip_id', $trip->id)->latest('id')->first();
+
+        return view('conductor_trips.add',
+        ['trip'=>$trip,
+        'bus_status'=>$bus_status
+    ]);
+    }
 
     /**
      * Display the specified resource.

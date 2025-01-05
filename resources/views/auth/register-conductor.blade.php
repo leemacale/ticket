@@ -66,9 +66,9 @@
         <div class="mt-4">
             <x-input-label for="company" :value="__('Bus Company')" />
             <select name="company" id="company" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" >
-                <option value="DLTB">DLTB</option>
-                <option value="JAM Liner">JAM Liner</option>
-                <option value="Victory Liner">Victory Liner</option>
+                <option value="1">DLTB</option>
+                <option value="2">JAM Liner</option>
+                <option value="3">Victory Liner</option>
             </select>
             <x-input-error :messages="$errors->get('company')" class="mt-2" />
         </div>

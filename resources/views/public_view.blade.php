@@ -31,9 +31,12 @@
   
 
     <!-- Flex container for vertical alignment and left alignment -->
-    <div class="grid items-center grid-cols-4 gap-4 px-3 mx-auto" style="position: relative; top: 180px; width:80%">
+    <div class=" px-3 mx-auto" style="position: relative; top: 180px; width:80%">
         <!-- First text field with placeholder -->
-       
+        <form method="POST" action="{{ route('search.trips') }}">
+            @csrf
+            @method('PUT')
+            <span class="grid items-center grid-cols-4 gap-4">
             <select name="from" id="from" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;" >
                 <option value="" selected disabled>Starting Point</option>
                 @foreach ($locations as $location)
@@ -48,7 +51,8 @@
             </select>
             <input type="date" name="tripdate" id="tripdate" class="px-10 py-2 pl-2 pr-8 text-black bg-white"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); color: black; width: 100%;">
            <input type="submit" name="search" value="Find Tickets" class="px-10 py-2 pl-2 pr-8 text-white bg-black"  style="font-family: 'Kanit', sans-serif; border-radius: 0; box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4); width: 100%;">
-      
+        </span>
+        </form>
 
     </div>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TripController;
+use App\Models\Companies;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -64,6 +65,30 @@ Route::get('/bus/{trip}/location',[TripController::class,'add_loc'])->name('trip
 
 Route::put('/bus/store/location',[BusPositionController::class,'store'])->name('bus.store');
 
+//trips conductor routes
+Route::get('/trips/conductor',[TripController::class,'index2'])->name('trips.index2');
+Route::get('/bus/{trip}/status',[TripController::class,'bus_status'])->name('bus.status');
+Route::get('/bus/{trip}/confirm',[TripController::class,'bus_confirm'])->name('bus.confirm');
+Route::get('/bus/{trip}/arrival',[TripController::class,'bus_arrival'])->name('bus.arrival');
+
+//conductor routes for admin
+Route::get('/conductor',[CompaniesController::class,'conductor'])->name('conductors.index');
+Route::get('/conductor/{conductor}/approve',[CompaniesController::class,'approve'])->name('conductors.approve');
+
+
+
+
+Route::put('/search/trips',[TripController::class,'search'])->name('search.trips');
+
+
+
+
+
+
+
+
+
+
 
 
 Route::get('/login', function () {
@@ -76,6 +101,9 @@ Route::get('/',[SearchController::class,'index'])->name('publicview');
 
 // End ///
 
+Route::get('/dashboard/conductor', function () {
+    return view('conductor-account.conductor_page');
+});
 
 // Routes for Register
 Route::get('/create-account', function () {
@@ -87,6 +115,13 @@ Route::get('/dashboard/register-conductor', function () {
 })->name('conductor.reg');
 
 // End
+
+
+
+
+
+
+///////////////////////////old not mine
 
 
 Route::get('/howtobook', function () {
