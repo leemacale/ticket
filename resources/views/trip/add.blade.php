@@ -53,6 +53,12 @@
             <input type="text" name="bus"  class="block w-full mt-1" >
             <x-input-error :messages="$errors->get('bus')" class="mt-2" />
         </div>
+        <div>
+            <x-input-label for="price" :value="__('Ticket Price')" />
+            <input type="number" name="price"  class="block w-full mt-1" >
+            <x-input-error :messages="$errors->get('price')" class="mt-2" />
+        </div>
+
 
         <div class="flex items-center justify-end mt-4">
        

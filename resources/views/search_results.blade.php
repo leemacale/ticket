@@ -103,6 +103,7 @@
       <div class="flex items-center">
         <div class="text-sm">
           <p class="text-gray-600">Trip Date: {{$trip->date}}, {{$trip->time}}</p>
+          <p class="text-gray-600">Ticket Price: {{$trip->price}}</p>
         </div>
       </div>
       
@@ -111,7 +112,7 @@
 <div class="w-full bg-red-700 items-center text-center">
     <br>
     
-    <x-bladewind::button  color="white" icon="book-open"  title="delete" >Book Now</x-bladewind::button>
+    <x-bladewind::button  color="white" icon="book-open"  title="delete" onclick="window.location='{{route('book.trip', $trip->id) }}'" >Book Now</x-bladewind::button>
   </div>
     </div>
   </div>

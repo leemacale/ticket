@@ -16,6 +16,7 @@ class Trip extends Model
         'time',
         'bus',
         'company_id',
+        'price',
     ];
 
     public function company() :BelongsTo

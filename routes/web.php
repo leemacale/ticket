@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TripController;
 use App\Models\Companies;
 
@@ -82,8 +83,11 @@ Route::put('/search/trips',[TripController::class,'search'])->name('search.trips
 
 
 
-
-
+Route::get('/tickets/booked',[TicketController::class,'index'])->name('tickets.index');
+Route::get('/trip/{trip}/book',[TicketController::class,'booking'])->middleware(['auth', 'verified'])->name('book.trip');
+Route::put('/ticket/store',[TicketController::class,'store'])->name('ticket.store');
+Route::delete('/ticket/{ticket}',[TicketController::class,'destroy'])->name('ticket.destroy');
+Route::get('/ticket/{ticket}/view',[TicketController::class,'view'])->name('ticket.view');
 
 
 

@@ -15,12 +15,13 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 text-white sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('publicview')" >
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('ticekts*')">
                         {{ __('My Trips') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations*')">
-                        {{ __('Locations') }}
-                    </x-nav-link>
+           
         
                 </div>
             </div>

@@ -66,6 +66,7 @@ class TripController extends Controller
             'time' => ['required', 'string', 'max:255'],
             'company_id' => ['required'],
             'bus' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'string', 'max:255'],
         ]);
         Trip::create($validated);
         return redirect(route('trips.index', absolute: false))->with('message', 'Trip created successfully!');

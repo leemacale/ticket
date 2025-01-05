@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trip;
 use App\Models\ticket;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+
 
 class TicketController extends Controller
 {
@@ -13,6 +17,21 @@ class TicketController extends Controller
     public function index()
     {
         //
+        $user_id = Auth::user()->id;
+        $tickets = ticket::where('user_id', $user_id)->get();
+        
+        return view('booking.trips',
+        ['tickets'=>$tickets
+    ]);
+
+    }
+    public function booking(Trip $trip)
+    {
+        //
+
+        return view('booking.index',
+        ['trips'=>$trip
+    ]);
     }
 
     /**
@@ -26,17 +45,35 @@ class TicketController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
-    }
 
+        $user_id = Auth::user()->id;
+
+        //
+        $validated = $request->validate([
+            'seat' => ['max:255'],
+            'trip_id' => ['required', 'string', 'max:255'],
+           
+        ]);
+        ticket::create([
+            'seat'=>$request->seat,
+            'trip_id'=>$request->trip_id,
+            'user_id'=>$user_id
+        ]);
+        return redirect(route('tickets.index', absolute: false))->with('message', 'Trip Booked successfully!');
+    } 
     /**
      * Display the specified resource.
      */
-    public function show(ticket $ticket)
+    public function view(ticket $ticket)
     {
         //
+        $tickets = ticket::where('id', $ticket->id)->latest()->first();
+        
+        return view('booking.viewbook',
+        ['tickets'=>$tickets
+    ]);
     }
 
     /**
@@ -61,5 +98,8 @@ class TicketController extends Controller
     public function destroy(ticket $ticket)
     {
         //
+        $ticket->delete();
+ 
+        return redirect(route('tickets.index'))->with('message', 'Ticket Cancelled successfully!');
     }
 }

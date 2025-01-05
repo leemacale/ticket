@@ -20,6 +20,7 @@
                 <th>Time</th>
                 <th>Company</th>
                 <th>Bus No</th>
+                <th>Ticket Price</th>
                 <th></th>
             </thead>
             @foreach ($trips as $trip)
@@ -30,6 +31,7 @@
                     <td>{{$trip->time}}</td>        
                     <td>{{$trip->company->name}}</td>        
                     <td>{{$trip->bus}}</td>        
+                    <td>{{$trip->price}}</td>        
                     <td>
                         <form method="POST" action="{{ route('trips.destroy', $trip->id) }}">
                             @csrf
