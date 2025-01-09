@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\BusPositionController;
 use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\DashcamController;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\IncidentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
@@ -13,6 +16,11 @@ use App\Models\Companies;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/salesreport', function () {
+    return view('sales.index');
+})->middleware(['auth', 'verified'])->name('sales');
 
 Route::get('/user/dashboard', function () {
     return view('user-dashboard');
@@ -61,6 +69,8 @@ Route::put('/trips/store',[TripController::class,'store'])->name('trips.store');
 Route::delete('/trips/{trip}',[TripController::class,'destroy'])->name('trips.destroy');
 
 Route::get('/trips/{trip}/location',[TripController::class,'loc'])->name('trips.loc');
+Route::get('/trips/{ticket}/passengerlocation',[TripController::class,'loc2'])->name('trips.loc2');
+
 Route::get('/bus/{trip}/location',[TripController::class,'add_loc'])->name('trips.add_loc');
 
 
@@ -74,6 +84,7 @@ Route::get('/bus/{trip}/arrival',[TripController::class,'bus_arrival'])->name('b
 
 //conductor routes for admin
 Route::get('/conductor',[CompaniesController::class,'conductor'])->name('conductors.index');
+Route::delete('/conductor/{conductor}',[CompaniesController::class,'destroy2'])->name('conductors.destroy');
 Route::get('/conductor/{conductor}/approve',[CompaniesController::class,'approve'])->name('conductors.approve');
 
 
@@ -87,11 +98,26 @@ Route::get('/tickets/booked',[TicketController::class,'index'])->name('tickets.i
 Route::get('/trip/{trip}/book',[TicketController::class,'booking'])->middleware(['auth', 'verified'])->name('book.trip');
 Route::put('/ticket/store',[TicketController::class,'store'])->name('ticket.store');
 Route::delete('/ticket/{ticket}',[TicketController::class,'destroy'])->name('ticket.destroy');
-Route::get('/ticket/{ticket}/view',[TicketController::class,'view'])->name('ticket.view');
+Route::get('/ticket/{ticket}/viewticket',[TicketController::class,'views'])->name('ticket.views');
+
+
+Route::get('/booking/adminview',[TicketController::class,'admin'])->name('tickets.admin');
+Route::get('/booking/{trip}/conductorview',[TicketController::class,'conductor'])->name('tickets.conductor');
+
+Route::get('/incident',[IncidentController::class,'index'])->name('incident.index');
+Route::get('/incident/{trip}/add',[IncidentController::class,'add'])->name('incident.add');
+Route::put('/incident/store',[IncidentController::class,'store'])->name('incident.store');
+
+
+Route::get('/dashcam',[DashcamController::class,'index'])->name('dashcam.index');
+Route::get('/dashcam/{trip}/add',[DashcamController::class,'add'])->name('dashcam.add');
+Route::put('/dashcam/store',[DashcamController::class,'store'])->name('dashcam.store');
 
 
 
 
+Route::get('/foodorder',[FoodController::class,'index'])->name('food.index');
+Route::get('/foodorder/conductor',[FoodController::class,'index2'])->name('food.index2');
 
 
 

@@ -206,6 +206,17 @@ class TripController extends Controller
         ]);
     }
 
+    public function loc2(Trip $ticket)
+    {
+        //
+        $busposition = BusPosition::where('trip_id', $ticket->id)->latest('id')->first();
+        return view('trip.position2',[
+            'busposition' => $busposition,
+            'trip' => $ticket
+        ]);
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.

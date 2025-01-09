@@ -105,4 +105,14 @@ class CompaniesController extends Controller
  
         return redirect(route('company.index'))->with('message', 'Company deleted successfully!');
     }
+
+    public function destroy2(User $conductor)
+    {
+        //
+    
+ 
+        $conductor->delete();
+ 
+        return redirect(route('conductors.index'))->with('message', 'Conductor deleted successfully!');
+    }
 }

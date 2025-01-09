@@ -30,11 +30,12 @@
                     <td>{{$ticket->trip->price}}</td>        
                     <td>{{$ticket->trip->price+ 32}}</td>        
                     <td>
-                        <form method="POST" action="{{ route('ticket.destroy', $ticket->id) }}">
+                        <form method="POST" action="{{ route('ticket.destroy', $ticket->trip->id) }}">
                             @csrf
                             @method('DELETE')
-                            <x-bladewind::button  color="green" icon="eye"  title="view ticket" onclick="window.location='{{route('ticket.view', $ticket->id) }}'">VIEW TICKET</x-bladewind::button>
-                        <x-bladewind::button  color="red" icon="trash"  title="delete" can_submit="true">CANCEL</x-bladewind::button>
+                            <x-bladewind::button  color="green" icon="eye"  title="view ticket" onclick="window.location='{{route('ticket.views', $ticket->id) }}'">VIEW TICKET</x-bladewind::button>
+                            <x-bladewind::button  color="yellow" icon="map-pin"  title="bus location" onclick="window.location='{{route('trips.loc2', $ticket->trip->id) }}'">BUS LOCATION</x-bladewind::button>
+                            <x-bladewind::button  color="red" icon="trash"  title="delete" can_submit="true">CANCEL</x-bladewind::button>
                         </form>
                         </td>
                 </tr>

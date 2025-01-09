@@ -24,4 +24,5 @@ class Trip extends Model
         return $this->belongsTo(Companies::class, 'company_id',);
     }
 
+  
 }

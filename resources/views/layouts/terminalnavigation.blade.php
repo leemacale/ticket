@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="flex items-center shrink-0">
                     <a href="{{ route('dashboard') }}">
-                        <img src="{{url('/images/twbus.png')}}"  alt="" style="width: 45%" />
+                        <img src="{{asset('/images/twbus.png')}}"  alt="" style="width: 45%" />
                         
                     </a>
                   
@@ -15,13 +15,29 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 text-white sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('My Trips') }}
+                    <x-nav-link :href="route('sales')" :active="request()->routeIs('sales')">
+                        {{ __('Sales') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations*')">
-                        {{ __('Locations') }}
+                    @if(Auth::user()->id == 2)
+                    <x-nav-link :href="route('conductors.index')" :active="request()->routeIs('conductors*')">
+                        {{ __('Conductors') }}
                     </x-nav-link>
-        
+                    <x-nav-link :href="route('trips.index')" :active="request()->routeIs('trips*')">
+                        {{ __('Trips') }}
+                    </x-nav-link>
+                    @endif
+                    <x-nav-link :href="route('tickets.admin')" :active="request()->routeIs('tickets*')">
+                        {{ __('Booking') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('incident.index')" :active="request()->routeIs('incident*')">
+                        {{ __('Incident') }}
+                    </x-nav-link>
+                    @if(Auth::user()->id == 2)
+                    <x-nav-link :href="route('food.index')" :active="request()->routeIs('food*')">
+                        {{ __('Food Order') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

@@ -25,6 +25,28 @@ class TicketController extends Controller
     ]);
 
     }
+
+    public function admin()
+    {
+        //
+        $tickets = ticket::orderBy('user_id')->get();
+        
+        return view('booking.adminview',
+        ['trips'=>$tickets
+    ]);
+
+    }
+    
+    public function conductor(Trip $trip)
+    {
+        //
+        $tickets = ticket::where('trip_id', $trip->id)->get();
+        
+        return view('booking.conductorview',
+        ['trips'=>$tickets
+    ]);
+
+    }
     public function booking(Trip $trip)
     {
         //
@@ -66,15 +88,18 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function view(ticket $ticket)
+    public function views(ticket $ticket)
     {
         //
-        $tickets = ticket::where('id', $ticket->id)->latest()->first();
+    
+        $tickets = ticket::where('id', $ticket->id)->first();
         
         return view('booking.viewbook',
         ['tickets'=>$tickets
     ]);
     }
+  
+
 
     /**
      * Show the form for editing the specified resource.

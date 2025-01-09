@@ -5,8 +5,10 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800 ">
             {{ __('Trips') }}
         </h2>
+        @if(Auth::user()->id == 2)
         <x-bladewind::button color="green" icon="plus"
             onclick="window.location='{{ route('trips.add') }}'">Add</x-bladewind::button>
+            @endif
         </div>
     </x-slot>
 
@@ -33,14 +35,17 @@
                     <td>{{$trip->bus}}</td>        
                     <td>{{$trip->price}}</td>        
                     <td>
+                        
                         <form method="POST" action="{{ route('trips.destroy', $trip->id) }}">
                             @csrf
                             @method('DELETE')
                             <!-- //route('contracts.payment', $trip->id) }}  -->
-                            <x-bladewind::button  color="green" icon="map-pin"  title="send location" onclick="window.location='{{route('trips.add_loc', $trip->id) }}'">SEND LOCATION</x-bladewind::button>
                             <x-bladewind::button  color="yellow" icon="map-pin"  title="bus location" onclick="window.location='{{route('trips.loc', $trip->id) }}'">BUS LOCATION</x-bladewind::button>
+                            @if(Auth::user()->id == 2)
                         <x-bladewind::button  color="red" icon="trash"  title="delete" can_submit="true">DELETE</x-bladewind::button>
+                        @endif
                         </form>
+                        
                         </td>
                 </tr>
 

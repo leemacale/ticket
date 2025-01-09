@@ -25,8 +25,13 @@
                     <td>
                        
                             <!-- //route('contracts.payment', $trip->id) }}  -->
-                            <x-bladewind::button  color="green" icon="check"  title="send location" onclick="window.location='{{route('conductors.approve', $conductor->id) }}'">Approve</x-bladewind::button>
-              
+                           
+                            <form method="POST" action="{{ route('conductors.destroy', $conductor->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <x-bladewind::button  color="green" icon="check"  title="send location" onclick="window.location='{{route('conductors.approve', $conductor->id) }}'">Approve</x-bladewind::button>
+                            <x-bladewind::button  color="red" icon="trash"  title="delete" can_submit="true">DELETE</x-bladewind::button>
+                            </form>
                         </td>
                 </tr>
 
