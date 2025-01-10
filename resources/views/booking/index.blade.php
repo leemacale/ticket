@@ -63,13 +63,21 @@
                     <span class="text-xl text-gray-700">{{$total}} PHP</span>
                 </div>
 
+
+                <div class="flex items-start justify-between w-full mt-0 mb-1">
+                    <span class="text-xl font-semibold text-gray-700">Discount</span>
+                    @if (Auth::user()->filepath != '')
+                    <span class="text-xl font-semibold text-gray-700">{{($trips->price  + $total) * 0.2}} PHP</span>
+                    @endif
+                    
+                </div>
                 <!-- Horizontal Line -->
                 <hr class="w-full my-2 mb-4 border-t border-black">
 
                 <!-- Lower Content -->
                 <div class="flex items-start justify-between w-full mt-0 mb-1">
                     <span class="text-xl font-semibold text-gray-700">Total</span>
-                    <span class="text-xl font-semibold text-gray-700">{{$trips->price  + $total}} PHP</span>
+                    <span class="text-xl font-semibold text-gray-700">{{($trips->price  + $total) - (($trips->price  + $total) * 0.2)}} PHP</span>
                 </div>
             </div>
             </div>
@@ -230,12 +238,12 @@
         
         
             </div>
-        <div class="flex space-x-4">
-            <div class="flex items-center w-3/4 h-32 pb-6 pl-6 ">
+        <div class="relative flex h-3/4 ">
+            <div class="flex items-center w-3/4 h-40 pb-6 pl-6 ">
                 
                 
             </div>
-            <div class="flex flex-col items-start justify-between h-32 px-4 py-2 bg-white shadow w-80">
+            <div class="flex flex-col items-start justify-between px-4 py-2 bg-white shadow h-1/2 w-80">
                 <!-- Upper Content -->
                 <div class="flex items-start justify-between w-full pb-2">
                     <span class="text-xl text-gray-700">Tickets</span>
@@ -250,6 +258,15 @@
                     <span class="text-xl text-gray-700">fees</span>
                     <span class="text-xl text-gray-700">32 PHP</span>
                 </div>
+                
+
+                <div class="flex items-start justify-between w-full mt-0 mb-1">
+                    <span class="text-xl font-semibold text-gray-700">Discount</span>
+                    @if (Auth::user()->filepath != '')
+                    <span class="text-xl font-semibold text-gray-700">{{($trips->price  + $total) * 0.2}} PHP</span>
+                    @endif
+                    
+                </div>
 
                 <!-- Horizontal Line -->
                 <hr class="w-full my-2 mb-4 border-t border-black">
@@ -257,7 +274,7 @@
                 <!-- Lower Content -->
                 <div class="flex items-start justify-between w-full mt-0 mb-1">
                     <span class="text-xl font-semibold text-gray-700">Total</span>
-                    <span class="text-xl font-semibold text-gray-700">{{$trips->price +32  + $total}} PHP</span>
+                    <span class="text-xl font-semibold text-gray-700">{{($trips->price  + $total) - (($trips->price  + $total) * 0.2) + 32}} PHP</span>
                 </div>
             </div>
             </div>
