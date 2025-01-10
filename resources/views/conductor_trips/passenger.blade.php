@@ -1,9 +1,9 @@
-<x-app-layout>
+<x-conductor-layout>
     <div class="px-8 overflow-x-auto">
     <x-slot name="header">
         <div class="flex justify-between">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 ">
-            {{ __('Conductors') }}
+            {{ __('Passengers') }}
         </h2>
 
     </x-slot>
@@ -13,25 +13,23 @@
 
             <thead>
                 <th>Name</th>
-                <th>Company</th>
                 <th>Status</th>
                 <th>ID</th>
                 <th></th>
             </thead>
-            @foreach ($conductors as $conductor)
+            @foreach ($passengers as $passenger)
                 <tr>
-                    <td>{{$conductor->name}}</td>        
-                    <td>{{$conductor->companyname->name}}</td>        
-                    <td>{{$conductor->status}}</td>        
-                    <td><a href="{{$conductor->filepath}}">View File</a> </td>     
+                    <td>{{$passenger->name}}</td>            
+                    <td>{{$passenger->status}}</td>        
+                    <td><a href="../{{$passenger->filepath}}">View File</a> </td>     
                     <td>
                        
                             <!-- //route('contracts.payment', $trip->id) }}  -->
                            
-                            <form method="POST" action="{{ route('conductors.destroy', $conductor->id) }}">
+                            <form method="POST" action="{{ route('passenger.destroy', $passenger->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <x-bladewind::button  color="green" icon="check"  title="send location" onclick="window.location='{{route('conductors.approve', $conductor->id) }}'">Approve</x-bladewind::button>
+                                <x-bladewind::button  color="green" icon="check"  title="send location" onclick="window.location='{{route('passenger.approve', $passenger->id) }}'">Approve</x-bladewind::button>
                             <x-bladewind::button  color="red" icon="trash"  title="delete" can_submit="true">DELETE</x-bladewind::button>
                             </form>
                         </td>

@@ -31,12 +31,15 @@ class AuthenticatedSessionController extends Controller
         $url = "";
         if($request->user()->role == "admin"){
             $url = "dashboard";
-        }elseif($request->user()->role == "conductor"){
+        }elseif($request->user()->role == "conductor" && $request->user()->status == 'approved'){
             $url = "conductor.dashboard";
-        }elseif($request->user()->role == "user"){
+        }elseif($request->user()->role == "user" && $request->user()->status == 'approved'){
             $url = "user.dashboard";
         }elseif($request->user()->role == "terminal"){
             $url = "dashboard";
+        }else{
+            Auth::guard('web')->logout();
+            $url = "login";
         }
 
         return redirect()->intended(route($url, absolute: false));

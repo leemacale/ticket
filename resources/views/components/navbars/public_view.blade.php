@@ -43,17 +43,7 @@
                 <a href="/aboutus" class="font-normal text-white hover:text-gray-300" style="font-family: 'Kanit', sans-serif;">ABOUT US</a>
 
                 <!-- Desktop Dropdown Button and Menu -->
-                <div class="relative">
-                    <button id="desktopDropdownButton" class="flex items-center block px-4 py-2 space-x-2 hover:text-gray-300" style="font-family: 'Kanit', sans-serif;">
-                        <span>BUS</span>
-                        <img src="{{ asset('images/down.png') }}" alt="Down arrow">
-                    </button>
-                    <div id="desktopDropdownMenu" class="absolute left-0 z-50 hidden w-48 mt-2 bg-white border rounded-md shadow-lg" >
-                        <a href="/dltb_bus" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">DLTB</a>
-                        <a href="/jam_bus" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">JAM Liner</a>
-                        <a href="/victory_bus" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Victory Liner</a>
-                    </div>
-                </div>
+              
             </div>
 
             <!-- Right-aligned Register and Login Links -->

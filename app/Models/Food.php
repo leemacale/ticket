@@ -9,8 +9,8 @@ class Food extends Model
 {
     protected $fillable = [
         'trip_id',
-        'order',
-        'total',
+        'user_id',
+        'food_id',
 
        
     ];
@@ -19,5 +19,13 @@ class Food extends Model
     public function trip() :BelongsTo
     {
         return $this->belongsTo(Trip::class, 'trip_id',);
+    }
+    public function foodmenu() :BelongsTo
+    {
+        return $this->belongsTo(Menu::class, 'food_id',);
+    }
+    public function user() :BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id',);
     }
 }

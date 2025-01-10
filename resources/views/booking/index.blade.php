@@ -33,43 +33,43 @@
       
         <x-bladewind::tab-content name="tab-1" active="true">
             <div class="flex space-x-4">
-            <div class="bg-white shadow h-16 w-3/4 flex items-center pl-6">
+            <div class="flex items-center w-3/4 h-16 pl-6 bg-white shadow">
                 <!-- Image -->
-                <img src="{{ asset('images/boy.png') }}" alt="Boy" class="h-6 w-6 rounded-full">
+                <img src="{{ asset('images/boy.png') }}" alt="Boy" class="w-6 h-6 rounded-full">
                 <!-- Text -->
-                <span class="ml-4 text-gray-700 font-medium">1 Passenger</span>
+                <span class="ml-4 font-medium text-gray-700">1 Passenger</span>
             </div>
-            <div class="bg-white shadow h-32 w-80 flex flex-col items-start justify-between px-4 py-2">
+            <div class="flex flex-col items-start justify-between h-32 px-4 py-2 bg-white shadow w-80">
                 <!-- Upper Content -->
                 <div class="flex items-start justify-between w-full pb-2">
-                    <span class="text-gray-700 text-xl">Tickets</span>
-                    <span class="text-gray-700 text-xl">{{$trips->price}} PHP</span>
+                    <span class="text-xl text-gray-700">Tickets</span>
+                    <span class="text-xl text-gray-700">{{$trips->price}} PHP</span>
                 </div>
 
                 <!-- Horizontal Line -->
-                <hr class="border-t border-black w-full my-2 mb-4">
+                <hr class="w-full my-2 mb-4 border-t border-black">
 
                 <!-- Lower Content -->
                 <div class="flex items-start justify-between w-full mt-0 mb-1">
-                    <span class="text-gray-700 text-xl font-semibold">Total</span>
-                    <span class="text-gray-700 text-xl font-semibold">{{$trips->price}} PHP</span>
+                    <span class="text-xl font-semibold text-gray-700">Total</span>
+                    <span class="text-xl font-semibold text-gray-700">{{$trips->price}} PHP</span>
                 </div>
             </div>
             </div>
 
             <div class="flex space-x-4">
-                <div class="bg-white shadow h-32 w-3/4  items-center pl-6 pt-6">
-                    <b><span class="text-m text-gray-800 text-bold">{{$trips->date}}, {{$trips->time}}&nbsp;&nbsp;{{$trips->start}} -> {{$trips->destination}}</span></b>
+                <div class="items-center w-3/4 h-32 pt-6 pl-6 bg-white shadow">
+                    <b><span class="text-gray-800 text-m text-bold">{{$trips->date}}, {{$trips->time}}&nbsp;&nbsp;{{$trips->start}} -> {{$trips->destination}}</span></b>
                     <hr>
                    
-                        <i class="fas fa-bus text-gray-800"></i><span class="text-m text-gray-800">Bus ride with {{$trips->company->name}} in <strong class="font-bold text-m">Regular AC</strong></span>
+                        <i class="text-gray-800 fas fa-bus"></i><span class="text-gray-800 text-m">Bus ride with {{$trips->company->name}} in <strong class="font-bold text-m">Regular AC</strong></span>
                         , Bus no. {{$trips->bus}}
                     
                 </div>
             </div>
 
             <div class="flex ">
-                <div class="bg-white shadow h-100 w-3/4  items-center pl-6 pt-6 pb-6">
+                <div class="items-center w-3/4 pt-6 pb-6 pl-6 bg-white shadow h-100">
                     <img src="{{ asset('images/seat.png') }}" alt="seats">
                     <select name="seat" id="seat">
                         <option value="" selected disabled>Choose Your Seat</option>
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div
-            class="w-3/4 bg-white h-45 shadow-md relative flex flex-col items-center"
+            class="relative flex flex-col items-center w-3/4 bg-white shadow-md h-45"
             style="position: absolute; top: 910px; left: 150px; width: 920px; margin-bottom: 300px; padding: 20px;"
         >
             <p style="margin-top: 5px; font-size: 0.870rem;  ">
@@ -93,7 +93,7 @@
             </p>
         
          <!-- Order Food Button -->
-        <a class="mt-4 px-6 py-2 bg-black text-white font-semibold rounded hover:bg-gray-800 focus:outline-none flex items-center" onclick="window.location='{{ route('user.order_hamburger_jb')}}'">
+        <a class="flex items-center px-6 py-2 mt-4 font-semibold text-white bg-black rounded hover:bg-gray-800 focus:outline-none" href="{{route('food.index', $trips->id)}}">
             <img src="{{ asset('images/OrderFood.png') }}" alt="Order Food" class="w-5 h-5 mr-2"> <!-- Add margin-right to separate image from text -->
             <span class="text-center">Order Food</span>
         </a>
@@ -107,7 +107,7 @@
         <x-bladewind::tab-content name="tab-2">
             <h1><b>Passenger Information</b></h1>
             <hr><br>
-            <div class="w-1/2 bg-white p-3 ">
+            <div class="w-1/2 p-3 bg-white ">
             <div>
                 <x-input-label for="name" :value="__('Name')" />
                 <x-text-input id="name" class="block w-full mt-1" type="text" name="name" value="{{Auth::user()->name}}" />
@@ -148,7 +148,7 @@
         <x-bladewind::tab-content name="tab-3" >
             <h1><b>Trip Information</b></h1>
             <hr><br>
-            <div class="w-1/2 bg-white p-3 ">
+            <div class="w-1/2 p-3 bg-white ">
                 <h2><b>Passenger Information:</b></h2>
                 <hr><br>
                 *{{Auth::user()->name}}, {{Auth::user()->gender}}, Filipino
@@ -157,7 +157,7 @@
                 <hr><br>
                 {{$trips->date}}, {{$trips->time}}&nbsp;&nbsp;{{$trips->start}} -> {{$trips->destination}}
             </div><br><br>
-            <div class="w-1/2 bg-white p-3 mx-auto">
+            <div class="w-1/2 p-3 mx-auto bg-white">
                 <span >
                     By Going to the Next Step , you confirm that you have read and understood
                     <a href="https://example.com/terms-and-conditions" class="text-blue-500 " target="_blank">Terms and Conditions</a>, and
@@ -168,12 +168,12 @@
 
         <x-bladewind::tab-content name="tab-4">
            <div
-            class="w-3/4 bg-white  shadow-md relative flex flex-col items-center justify-center"
+            class="relative flex flex-col items-center justify-center w-3/4 bg-white shadow-md"
             style="position: absolute; top: 200px; left: 150px; height:12%; width: 920px; ; padding: 20px; z-index: 10;">
             <!-- Button Container (Flex) -->
         
-            <input type="radio" id="gcash" name="payment_method" class="absolute left-3 top-4" checked><h1 class="text-xl text-black font-bold" style="position: absolute; bottom: 57px; left: 30px;"></h1>
-        <img src="{{ asset('images/paymongo.png') }}" alt="Previous" class="w-18 h-6" style="position: absolute; top: 13px; left: 35px;">
+            <input type="radio" id="gcash" name="payment_method" class="absolute left-3 top-4" checked><h1 class="text-xl font-bold text-black" style="position: absolute; bottom: 57px; left: 30px;"></h1>
+        <img src="{{ asset('images/paymongo.png') }}" alt="Previous" class="h-6 w-18" style="position: absolute; top: 13px; left: 35px;">
         <p style="margin-top: 10px; margin-left: -750px; font-size: 0.870rem;  ">
         Service Fee 32 PHP
             </p>
@@ -191,28 +191,28 @@
         
             </div>
         <div class="flex space-x-4">
-            <div class="  h-32 w-3/4 flex items-center pl-6 pb-6">
+            <div class="flex items-center w-3/4 h-32 pb-6 pl-6 ">
                 
                 
             </div>
-            <div class="bg-white shadow h-32 w-80 flex flex-col items-start justify-between px-4 py-2">
+            <div class="flex flex-col items-start justify-between h-32 px-4 py-2 bg-white shadow w-80">
                 <!-- Upper Content -->
                 <div class="flex items-start justify-between w-full pb-2">
-                    <span class="text-gray-700 text-xl">Tickets</span>
-                    <span class="text-gray-700 text-xl">{{$trips->price}} PHP</span>
+                    <span class="text-xl text-gray-700">Tickets</span>
+                    <span class="text-xl text-gray-700">{{$trips->price}} PHP</span>
                 </div>
                 <div class="flex items-start justify-between w-full pb-1">
-                    <span class="text-gray-700 text-xl">Taxes and fees</span>
-                    <span class="text-gray-700 text-xl">32 PHP</span>
+                    <span class="text-xl text-gray-700">Taxes and fees</span>
+                    <span class="text-xl text-gray-700">32 PHP</span>
                 </div>
 
                 <!-- Horizontal Line -->
-                <hr class="border-t border-black w-full my-2 mb-4">
+                <hr class="w-full my-2 mb-4 border-t border-black">
 
                 <!-- Lower Content -->
                 <div class="flex items-start justify-between w-full mt-0 mb-1">
-                    <span class="text-gray-700 text-xl font-semibold">Total</span>
-                    <span class="text-gray-700 text-xl font-semibold">{{$trips->price +32}} PHP</span>
+                    <span class="text-xl font-semibold text-gray-700">Total</span>
+                    <span class="text-xl font-semibold text-gray-700">{{$trips->price +32}} PHP</span>
                 </div>
             </div>
             </div>

@@ -29,6 +29,8 @@ class TicketController extends Controller
     public function admin()
     {
         //
+
+   
         $tickets = ticket::orderBy('user_id')->get();
         
         return view('booking.adminview',

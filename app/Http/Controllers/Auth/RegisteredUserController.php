@@ -42,6 +42,10 @@ class RegisteredUserController extends Controller
             
         ]);
 
+        $imageName = time().'.'.$request->filepath->extension();
+        $request->filepath->move(public_path('uploads'), $imageName);
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -50,11 +54,12 @@ class RegisteredUserController extends Controller
             'gender' => $request->gender,
             'contact' => $request->contact,
             'role' => 'user',
+            'filepath' => 'uploads/'.$imageName
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+
 
         return redirect(route('login', absolute: false));
     }
@@ -71,6 +76,10 @@ class RegisteredUserController extends Controller
             
         ]);
 
+        $imageName = time().'.'.$request->filepath->extension();
+        $request->filepath->move(public_path('uploads'), $imageName);
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -81,6 +90,7 @@ class RegisteredUserController extends Controller
             'company' => $request->company,
             'role' => 'conductor',
             'status' => 'pending',
+            'filepath' => 'uploads/'.$imageName
         ]);
 
         event(new Registered($user));

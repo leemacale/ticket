@@ -19,13 +19,14 @@
            
             </thead>
             @foreach ($dashcams as $dashcam)
+            @if($dashcam->trip->company->id == Auth::user()->company)
                 <tr>
                     <td>Trip {{$dashcam->trip->start}} to {{$dashcam->trip->destination}} ||  {{$dashcam->trip->date}} </td>        
                     <td>{{$dashcam->created_at}} </td>        
                     <td><a href="{{$dashcam->filepath}}">View File</a> </td>        
               
                 </tr>
-
+@endif
             @endforeach
         </table>
 

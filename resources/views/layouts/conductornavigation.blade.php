@@ -19,7 +19,9 @@
                         {{ __('Trips') }}
                     </x-nav-link>
                  
-        
+                    <x-nav-link :href="route('passenger.index')" :active="request()->routeIs('passenger*')">
+                        {{ __('Passenger') }}
+                    </x-nav-link>
                 </div>
             </div>
 

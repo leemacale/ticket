@@ -19,9 +19,14 @@ class TripController extends Controller
     public function index()
     {
         //
-
-        $trip = Trip::orderBy('id')
-        ->get();
+if(Auth::user()->role == 'terminal'){
+    $trip = Trip::where('company_id', Auth::user()->company)
+    ->get();
+}else{
+    $trip = Trip::orderBy('id')
+    ->get();
+}
+       
    
 
         return view('trip.index', [

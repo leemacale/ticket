@@ -8,6 +8,7 @@ use App\Http\Controllers\IncidentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\TripController;
@@ -18,9 +19,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/salesreport', function () {
-    return view('sales.index');
-})->middleware(['auth', 'verified'])->name('sales');
+
 
 Route::get('/user/dashboard', function () {
     return view('user-dashboard');
@@ -53,6 +52,21 @@ Route::get('/locations/add',[LocationController::class,'add'])->name('locations.
 Route::put('/locations/store',[LocationController::class,'store'])->name('locations.store');
 Route::delete('/locations/{location}',[LocationController::class,'destroy'])->name('locations.destroy');
 
+
+
+//menu routes
+
+Route::get('/menu',[MenuController::class,'index'])->name('menu.index');
+Route::get('/menu/add',[MenuController::class,'add'])->name('menu.add');
+Route::put('/menu/store',[MenuController::class,'store'])->name('menu.store');
+Route::delete('/menu/{menu}',[MenuController::class,'destroy'])->name('menu.destroy');
+
+
+//food
+Route::get('/food/{trips}',[FoodController::class,'index'])->name('food.index');
+Route::put('/food/add',[FoodController::class,'add'])->name('food.add');
+Route::delete('/food/{foods}',[FoodController::class,'destroy'])->name('food.destroy');
+Route::get('/food/{trips}/orders',[FoodController::class,'foodorders'])->name('food.orders');
 //Company routes
 
 Route::get('/company',[CompaniesController::class,'index'])->name('company.index');
@@ -87,10 +101,14 @@ Route::get('/conductor',[CompaniesController::class,'conductor'])->name('conduct
 Route::delete('/conductor/{conductor}',[CompaniesController::class,'destroy2'])->name('conductors.destroy');
 Route::get('/conductor/{conductor}/approve',[CompaniesController::class,'approve'])->name('conductors.approve');
 
+Route::get('/passenger',[CompaniesController::class,'passenger'])->name('passenger.index');
+Route::delete('/passenger/{passenger}',[CompaniesController::class,'destroypassenger'])->name('passenger.destroy');
+Route::get('/passenger/{passenger}/approve',[CompaniesController::class,'approvepassenger'])->name('passenger.approve');
 
 
 
 Route::put('/search/trips',[TripController::class,'search'])->name('search.trips');
+Route::get('/salesreport',[SearchController::class,'sales'])->name('sales.index');
 
 
 
@@ -114,10 +132,6 @@ Route::get('/dashcam/{trip}/add',[DashcamController::class,'add'])->name('dashca
 Route::put('/dashcam/store',[DashcamController::class,'store'])->name('dashcam.store');
 
 
-
-
-Route::get('/foodorder',[FoodController::class,'index'])->name('food.index');
-Route::get('/foodorder/conductor',[FoodController::class,'index2'])->name('food.index2');
 
 
 

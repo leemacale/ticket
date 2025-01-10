@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class SearchController extends Controller
 {
@@ -21,6 +23,20 @@ class SearchController extends Controller
             'locations' => $location
         ]);
     }
+
+
+    public function sales(Request $request)
+    {
+        //
+
+        $ticket = ticket::whereBetween('created_at', [$request->from, $request->to])->get();
+
+        return view('sales.index', [
+            'tickets' => $ticket
+        ]);
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.

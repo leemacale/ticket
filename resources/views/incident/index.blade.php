@@ -20,6 +20,7 @@
            
             </thead>
             @foreach ($incidents as $incident)
+            @if($incident->trip->company->id == Auth::user()->company)
                 <tr>
                     <td>Trip {{$incident->trip->start}} to {{$incident->trip->destination}} ||  {{$incident->trip->date}} </td>        
                     <td>{{$incident->location}} </td>        
@@ -27,7 +28,7 @@
                     <td><a href="{{$incident->filepath}}">View File</a> </td>        
               
                 </tr>
-
+                    @endif
             @endforeach
         </table>
 

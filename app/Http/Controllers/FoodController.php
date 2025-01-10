@@ -3,18 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\Menu;
+use App\Models\Trip;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Trip $trips)
+    {
+        //$incident = Incident::orderBy('trip_id')->get();
+        $menu = Menu::orderBy('category')
+        ->get();
+
+       
+        $food = Food::where('trip_id', $trips->id)
+        ->where('user_id', Auth::user()->id)
+        ->get();
+
+
+        return view('food.index', [
+            'menus' => $menu,
+            'trip' => $trips,
+            'food' => $food
+        ]);
+    }
+    public function foodorders(Trip $trips)
     {
         //$incident = Incident::orderBy('trip_id')->get();
 
-        return view('food.index');
+        
+        $food = Food::where('trip_id', $trips->id)
+        ->get();
+
+
+        return view('food.foods', [
+            
+            'trip' => $trips,
+            'food' => $food
+        ]);
     }
     public function index2()
     {
@@ -25,9 +56,18 @@ class FoodController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function add(Request $request)
     {
         //
+
+        Food::create([
+            'user_id' => Auth::user()->id,
+            'trip_id' => $request->trip_id,
+            'food_id' => $request->food_id
+        ]);
+        return redirect(route('food.index', $request->trip_id))->with('message', 'Food added successfully!');
+
+
     }
 
     /**
@@ -65,8 +105,11 @@ class FoodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Food $food)
+    public function destroy(Food $foods)
     {
         //
+        $foods->delete();
+ 
+        
     }
 }

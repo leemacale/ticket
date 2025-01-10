@@ -24,6 +24,7 @@
                 <th>Trip Status</th>
             </thead>
             @foreach ($trips as $trip)
+            @if($trip->trip->company->id == Auth::user()->company)
                 <tr>
                     <td>{{$trip->user->name}}</td>        
                     <td>{{$trip->trip->start}}</td>        
@@ -36,7 +37,7 @@
                     <td>{{$trip->bus->status}}</td>        
             
                 </tr>
-
+                @endif
             @endforeach
         </table>
 

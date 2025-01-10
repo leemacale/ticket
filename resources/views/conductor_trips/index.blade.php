@@ -34,7 +34,7 @@
                             <x-bladewind::button  color="green" icon="map-pin"  title="send location" onclick="window.location='{{route('trips.add_loc', $trip->id) }}'">SEND LOCATION</x-bladewind::button>
                             <x-bladewind::button  color="blue" icon="information-circle"  title="send location" onclick="window.location='{{route('bus.status', $trip->id) }}'">BUS STATUS</x-bladewind::button>
                             <x-bladewind::button  color="yellow" icon="clipboard-document-check"  title="booking" onclick="window.location='{{route('tickets.conductor', $trip->id) }}'">BOOKING</x-bladewind::button>
-                            <x-bladewind::button  color="orange" icon="fire"  title="send location" onclick="window.location='{{route('food.index2') }}'">FOOD ORDERS</x-bladewind::button>
+                            <x-bladewind::button  color="orange" icon="fire"  title="send location" onclick="window.location='{{route('food.orders', $trip->id) }}'">FOOD ORDERS</x-bladewind::button>
                             <x-bladewind::button  color="red" icon="bell-alert"  title="send location" onclick="window.location='{{route('incident.add', $trip->id) }}'">INCIDENT REPORT</x-bladewind::button>
                             <x-bladewind::button  color="violet" icon="bell-alert"  title="dashcam footage" onclick="window.location='{{route('dashcam.add', $trip->id) }}'">DASHCAM FOOTAGE</x-bladewind::button>
               

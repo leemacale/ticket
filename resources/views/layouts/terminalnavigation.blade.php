@@ -18,10 +18,11 @@
                     <x-nav-link :href="route('sales')" :active="request()->routeIs('sales')">
                         {{ __('Sales') }}
                     </x-nav-link>
-                    @if(Auth::user()->id == 2)
                     <x-nav-link :href="route('conductors.index')" :active="request()->routeIs('conductors*')">
                         {{ __('Conductors') }}
                     </x-nav-link>
+                    @if(Auth::user()->id == 2)
+                    
                     <x-nav-link :href="route('trips.index')" :active="request()->routeIs('trips*')">
                         {{ __('Trips') }}
                     </x-nav-link>

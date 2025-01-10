@@ -1,7 +1,7 @@
 <x-guest-layout>
     <h2 class="mx-auto "><b>User Registration</b></h2>
                 <hr><br>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
 
         <!-- Name -->
@@ -64,6 +64,13 @@
             <x-input-error :messages="$errors->get('gender')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="filepath" :value="__('ID')" />
+            <x-text-input id="filepath" class="block w-full mt-1" type="file" name="filepath" :value="old('filepath')" required autocomplete="filepath" required />
+            <x-input-error :messages="$errors->get('filepath')" class="mt-2" />
+        </div>
+
+        <div class="mt-4"
     
 
         <div class="flex items-center justify-end mt-4">
