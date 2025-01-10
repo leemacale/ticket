@@ -84,8 +84,13 @@
     </div>
 
     <!-- Register and Login Section -->
+
+
+  
     <a href="/create-account" class="block hover:bg-gray-700">Register</a>
     <a href="/login" class="block hover:bg-gray-700">Login</a>
+   
+    
 </div>
 
 

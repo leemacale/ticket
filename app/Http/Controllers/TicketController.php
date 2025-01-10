@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Food;
 use App\Models\Trip;
 use App\Models\ticket;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
+use function Pest\Laravel\get;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -52,9 +55,13 @@ class TicketController extends Controller
     public function booking(Trip $trip)
     {
         //
+        $seats = DB::table('tickets')->where('trip_id', $trip->id)->get();
+        $food = Food::where('trip_id', $trip->id)->where('user_id' , Auth::user()->id)->get();
 
         return view('booking.index',
-        ['trips'=>$trip
+        ['trips'=>$trip,
+        'foods'=>$food,
+        'seats'=>$seats
     ]);
     }
 
@@ -78,12 +85,14 @@ class TicketController extends Controller
         $validated = $request->validate([
             'seat' => ['max:255'],
             'trip_id' => ['required', 'string', 'max:255'],
+            'amount' => ['required', 'string', 'max:255'],
            
         ]);
         ticket::create([
             'seat'=>$request->seat,
             'trip_id'=>$request->trip_id,
-            'user_id'=>$user_id
+            'user_id'=>$user_id,
+            'price'=>$request->amount,
         ]);
         return redirect(route('tickets.index', absolute: false))->with('message', 'Trip Booked successfully!');
     } 

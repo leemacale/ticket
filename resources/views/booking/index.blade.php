@@ -45,6 +45,23 @@
                     <span class="text-xl text-gray-700">Tickets</span>
                     <span class="text-xl text-gray-700">{{$trips->price}} PHP</span>
                 </div>
+                <div class="flex items-start justify-between w-full pb-2">
+
+                    @php
+                        $total = 0;
+                    @endphp
+                    @foreach ($foods as $foods)
+                
+                  
+                    @php
+                        
+                        $total += $foods->foodmenu->price;
+                    @endphp    
+                
+            @endforeach
+                    <span class="text-xl text-gray-700">Food</span>
+                    <span class="text-xl text-gray-700">{{$total}} PHP</span>
+                </div>
 
                 <!-- Horizontal Line -->
                 <hr class="w-full my-2 mb-4 border-t border-black">
@@ -52,7 +69,7 @@
                 <!-- Lower Content -->
                 <div class="flex items-start justify-between w-full mt-0 mb-1">
                     <span class="text-xl font-semibold text-gray-700">Total</span>
-                    <span class="text-xl font-semibold text-gray-700">{{$trips->price}} PHP</span>
+                    <span class="text-xl font-semibold text-gray-700">{{$trips->price  + $total}} PHP</span>
                 </div>
             </div>
             </div>
@@ -71,10 +88,33 @@
             <div class="flex ">
                 <div class="items-center w-3/4 pt-6 pb-6 pl-6 bg-white shadow h-100">
                     <img src="{{ asset('images/seat.png') }}" alt="seats">
+                
                     <select name="seat" id="seat">
+
                         <option value="" selected disabled>Choose Your Seat</option>
+                        @php
+                            $arrays;
+                        @endphp
+                       
+                           
                         @for ($x=1;$x<=48;$x++)
-                        <option value="{{$x}}" >{{$x}}</option>
+                            @php
+                                $yes = 'false';
+                            @endphp
+                        @foreach ($seats as $seat)
+                        @if ($seat->seat == $x)
+                        @php
+                        $yes = 'true';
+                    @endphp
+                        @endif
+                        @endforeach
+                           @if ($yes == 'false')
+                           <option value="{{$x}}" >{{$x}}</option>
+                           @endif
+                            
+                        
+                            
+                      
                         @endfor
                         
                     </select>
@@ -202,7 +242,12 @@
                     <span class="text-xl text-gray-700">{{$trips->price}} PHP</span>
                 </div>
                 <div class="flex items-start justify-between w-full pb-1">
-                    <span class="text-xl text-gray-700">Taxes and fees</span>
+                    <span class="text-xl text-gray-700">Food</span>
+                    <span class="text-xl text-gray-700">{{ $total}} PHP</span>
+                </div>
+                <input type="hidden" name="amount" value="{{$trips->price +32  + $total}}">
+                <div class="flex items-start justify-between w-full pb-1">
+                    <span class="text-xl text-gray-700">fees</span>
                     <span class="text-xl text-gray-700">32 PHP</span>
                 </div>
 
@@ -212,7 +257,7 @@
                 <!-- Lower Content -->
                 <div class="flex items-start justify-between w-full mt-0 mb-1">
                     <span class="text-xl font-semibold text-gray-700">Total</span>
-                    <span class="text-xl font-semibold text-gray-700">{{$trips->price +32}} PHP</span>
+                    <span class="text-xl font-semibold text-gray-700">{{$trips->price +32  + $total}} PHP</span>
                 </div>
             </div>
             </div>
