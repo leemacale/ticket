@@ -49,9 +49,25 @@
             <!-- Right-aligned Register and Login Links -->
             <div class="flex items-center ml-auto space-x-4">
 <!-- Register Link (Already in your code) -->
+@if (Auth::user()->name ?? '' != '')
+    
+
+@if(Auth::user()->role == "admin")
+<a href="/dashboard" class="block hover:bg-gray-700">Dashboard</a>
+@elseif(Auth::user()->role == "conductor")
+<a href="/conductor/dashboard" class="block hover:bg-gray-700">Dashboard</a>
+@elseif(Auth::user()->role == "user")
+<a href="/user/dashboard" class="block hover:bg-gray-700">Dashboard</a>
+@elseif(Auth::user()->role == "terminal")
+<a href="/dashboard" class="block hover:bg-gray-700">Dashboard</a>
+@endif
+@else
+
 <a href="#" id="registerLink" class="font-normal text-white hover:text-gray-300" style="font-family: 'Kanit', sans-serif;">
     Register
 </a>                <a href="/login" class="font-normal text-white hover:text-gray-300" style="font-family: 'Kanit', sans-serif;">Login</a>
+
+@endif
             </div>
         </nav>
 
@@ -86,7 +102,7 @@
     <!-- Register and Login Section -->
 
 
-  
+
     <a href="/create-account" class="block hover:bg-gray-700">Register</a>
     <a href="/login" class="block hover:bg-gray-700">Login</a>
    
