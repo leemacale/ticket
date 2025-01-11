@@ -26,15 +26,15 @@
             @foreach ($trips as $trip)
             @if($trip->trip->company->id == Auth::user()->company)
                 <tr>
-                    <td>{{$trip->user->name}}</td>        
-                    <td>{{$trip->trip->start}}</td>        
-                    <td>{{$trip->trip->destination}}</td>        
-                    <td>{{$trip->trip->date}}</td>        
-                    <td>{{$trip->trip->time}}</td>        
-                    <td>{{$trip->trip->company->name}}</td>        
-                    <td>{{$trip->trip->bus}}</td>        
-                    <td>{{$trip->trip->price}}</td>        
-                    <td>{{$trip->bus->status}}</td>        
+                    <td>{{$trip->user->name ?? ''}}</td>        
+                    <td>{{$trip->trip->start ?? ''}}</td>        
+                    <td>{{$trip->trip->destination ?? ''}}</td>        
+                    <td>{{$trip->trip->date ?? ''}}</td>        
+                    <td>{{$trip->trip->time ?? ''}}</td>        
+                    <td>{{$trip->trip->company->name ?? ''}}</td>        
+                    <td>{{$trip->trip->bus ?? ''}}</td>        
+                    <td>{{$trip->trip->price ?? ''}}</td>        
+                    <td>{{$trip->bus->status ?? ''}}</td>        
             
                 </tr>
                 @endif

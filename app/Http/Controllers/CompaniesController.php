@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Trip;
 use App\Models\User;
+use App\Models\ticket;
 use App\Models\Companies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +26,22 @@ class CompaniesController extends Controller
         return view('company.index', [
             'companies' => $companies
         ]);
+    }
+    public function edits(ticket $ticket)
+    {
+        //
+        
+        return view('conductor_trips.addnew', [
+            'ticket' => $ticket
+        ]);
+    }
+    public function saveedit(Request $request)
+    {
+        //
+
+        $ticket = ticket::where('id',$request->ticket_id)->update('seat', $request->seat);
+        
+        return view('terminal.dashboard');
     }
 
     public function conductor()
@@ -58,9 +76,11 @@ class CompaniesController extends Controller
         User::where('id', $conductor->id)->update(['status'=>'approved']);
         
         $conductors = User::where('role', 'conductor')->get();
-        return view('conductor_trips.conductor', [
+
+
+    return redirect(route('conductors.index', [
             'conductors' => $conductors
-        ]);
+        ]) );
     }
 
     public function approvepassenger(User $passenger)
@@ -70,9 +90,9 @@ class CompaniesController extends Controller
         
         $passengers = User::where('role', 'user')->get();
  
-        return view('conductor_trips.passenger', [
+        return redirect(route('passenger.index', [
             'passengers' => $passengers
-        ]);
+        ]));
     }
 
 

@@ -105,6 +105,9 @@ Route::get('/passenger',[CompaniesController::class,'passenger'])->name('passeng
 Route::delete('/passenger/{passenger}',[CompaniesController::class,'destroypassenger'])->name('passenger.destroy');
 Route::get('/passenger/{passenger}/approve',[CompaniesController::class,'approvepassenger'])->name('passenger.approve');
 
+Route::get('/ticket/{ticket}/edit',[CompaniesController::class,'edits'])->name('passenger.edit');
+Route::post('/ticket/patch',[CompaniesController::class,'saveedit'])->name('passenger.saveedit');
+
 
 
 Route::put('/search/trips',[TripController::class,'search'])->name('search.trips');

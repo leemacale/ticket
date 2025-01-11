@@ -5,7 +5,7 @@
         <h2 class="text-xl font-semibold leading-tight text-gray-800 ">
             {{ __('Booking') }}
         </h2>
-   
+        
         </div>
     </x-slot>
 
@@ -22,6 +22,7 @@
                 <th>Bus No</th>
                 <th>Ticket Price</th>
                 <th>Trip Status</th>
+                <th></th>
             </thead>
             @foreach ($trips as $trip)
                 <tr>
@@ -34,6 +35,7 @@
                     <td>{{$trip->trip->bus}}</td>        
                     <td>{{$trip->trip->price}}</td>        
                     <td>{{$trip->bus->status}}</td>        
+                    <td><x-bladewind::button  color="green" icon="pen"  title="edit" onclick="window.location='{{route('passenger.edit', $trip->id) }}'">Edit</x-bladewind::button></td>        
             
                 </tr>
 
